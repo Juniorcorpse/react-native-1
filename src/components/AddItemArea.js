@@ -1,3 +1,5 @@
+/* eslint-disable semi */
+/* eslint-disable eqeqeq */
 /* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
@@ -21,15 +23,11 @@ export default (props) => {
 
     const handleSubmit = () => {
         if (item.trim() != ''){
-            let items = [...props.items];
-            items.push({
-                task:item.trim(),
-                done: false,
-            });
-            props.setItems(items);
+            props.onAdd(item.trim());
+            setItem('');
         }
-        setItem('');
     }
+
     return (
     <AdditemArea>
     <AdditemImput

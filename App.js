@@ -1,4 +1,9 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable quotes */
+/* eslint-disable no-alert */
+/* eslint-disable semi */
 /* eslint-disable prettier/prettier */
+/*eslint no-alert: "error"*/
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -24,12 +29,28 @@ const Listagem = styled.FlatList`
 
 export default () => {
   const [items, setItems] = useState(lista);
+
+  const addNewItem = (txt) => {
+    let newItems = [...items];
+    newItems.push({
+      task:txt,
+      done:false,
+    });
+    setItems(newItems);
+  }
+
+  const toggleDone = (index) => {
+    let newItems = [...items];
+    newItems[index].done = !newItems[index].done;
+    setItems(newItems);
+  }
+
   return (
     <Div>
-    <AddItemArea items={items}  setItems={setItems}/>
+    <AddItemArea onAdd={addNewItem}/>
       <Listagem
         data={items}
-        renderItem={({item}) => <ListaItem data={item} />}
+        renderItem={({item, index}) => <ListaItem onPress={() => toggleDone(index)} data={item} />}
         keyExtractor={(item, index) => String(index)}
       />
     </Div>
